@@ -15,6 +15,12 @@ class ChatComposer extends StatefulWidget {
   /// A callback when submit Text Message.
   final Function(String?) onReceiveText;
 
+  /// A callback when change Text Message.
+  final Function(String?)? onTextChanged;
+
+  /// A callback when change Direction Text Message.
+  final TextDirection? textDirection;
+
   /// A callback when start recording.
   final Function()? onRecordStart;
 
@@ -100,6 +106,8 @@ class ChatComposer extends StatefulWidget {
     Key? key,
     required this.onReceiveText,
     required this.onRecordEnd,
+    this.textDirection,
+    this.onTextChanged,
     this.onRecordStart,
     this.onRecordCancel,
     this.focusNode,
@@ -182,6 +190,8 @@ class _ChatComposerState extends State<ChatComposer>
                             boxShadow: widget.shadow),
                         child: MessageField(
                           controller: localController,
+                          textDirection: widget.textDirection,
+                          onTextChanged: widget.onTextChanged,
                           focusNode: widget.focusNode,
                           keyboardType: widget.keyboardType,
                           textCapitalization: widget.textCapitalization,
